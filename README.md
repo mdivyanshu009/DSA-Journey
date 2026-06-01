@@ -66,13 +66,13 @@ dsa-journey/
 
 | # | LC | Problem | Pattern | Status |
 |---|----|---------|---------|--------|
-| 1 | 125 | Valid Palindrome | Opposite ends | ⬜ |
-| 2 | 167 | Two Sum II — Input Array Is Sorted | Opposite ends | ⬜ |
-| 3 | 977 | Squares of a Sorted Array | Opposite ends | ⬜ |
-| 4 | 26 | Remove Duplicates from Sorted Array | Fast & Slow | ⬜ |
-| 5 | 283 | Move Zeroes | Fast & Slow | ⬜ |
-| 6 | 905 | Sort Array By Parity | Fast & Slow | ⬜ |
-| 7 | 88 | Merge Sorted Array | Two Arrays | ⬜ |
+| 1 | 125 | Valid Palindrome | Opposite ends | ✅ |
+| 2 | 167 | Two Sum II — Input Array Is Sorted | Opposite ends | ✅ |
+| 3 | 977 | Squares of a Sorted Array | Opposite ends | ✅ |
+| 4 | 26 | Remove Duplicates from Sorted Array | Fast & Slow | ✅ |
+| 5 | 283 | Move Zeroes | Fast & Slow | ✅ |
+| 6 | 905 | Sort Array By Parity | Fast & Slow | ✅ |
+| 7 | 88 | Merge Sorted Array | Two Arrays | ✅ |
 
 ### 🟡 Medium
 
