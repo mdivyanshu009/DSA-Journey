@@ -420,3 +420,251 @@ dsa-journey/
 - [NeetCode Roadmap](https://neetcode.io/roadmap)
 
 ---
+
+---
+
+# 📌 Hashing & Binary Search
+
+---
+
+## Topic 10 — Hashing: unordered_map
+
+**Core Idea:** Store key-value pairs for O(1) lookup. Use for frequency counting, storing indices, finding complements, and grouping elements.
+
+**When to use:**
+- "Find if complement exists" → store elements seen so far
+- "Count frequency of elements" → map element to count
+- "First occurrence / index" → map element to index
+- "Group elements by property" → map property to list
+
+**Key Insight:** HashMap trades space for time. O(n) space to get O(1) lookup instead of O(n) search. Whenever you're doing repeated lookups in an array, think hashmap first.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 1 | Two Sum | Complement finding | ⬜ |
+| 2 | 217 | Contains Duplicate | Existence check | ⬜ |
+| 3 | 383 | Ransom Note | Frequency counting | ⬜ |
+| 4 | 169 | Majority Element | Frequency counting | ⬜ |
+| 5 | 387 | First Unique Character in String | Frequency counting | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 6 | 49 | Group Anagrams | String as key | ⬜ |
+| 7 | 347 | Top K Frequent Elements | Freq map + sorting | ⬜ |
+| 8 | 128 | Longest Consecutive Sequence | Set + expand | ⬜ |
+| 9 | 454 | 4Sum II | Complement + freq map | ⬜ |
+| 10 | 36 | Valid Sudoku | Hashset per row/col/box | ⬜ |
+| 11 | 299 | Bulls and Cows | Frequency counting | ⬜ |
+
+### 🔴 Medium-Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 12 | 380 | Insert Delete GetRandom O(1) | Map + vector | ⬜ |
+| 13 | 41 | First Missing Positive | Index as hash | ⬜ |
+
+---
+
+## Topic 11 — Hashing: unordered_set
+
+**Core Idea:** Store unique elements for O(1) existence check. Use for duplicate detection, cycle detection, and membership queries.
+
+**When to use:**
+- "Does X exist in collection?" → set lookup O(1)
+- "Remove duplicates" → insert into set
+- "Find elements not in another array" → set difference
+- "Detect cycle" → store visited nodes
+
+**Key Insight:** Set is just a map without values. Use set when you only care about existence, not count. The Longest Consecutive Sequence trick — insert all into set, then only start counting from sequence beginners (num-1 not in set).
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 217 | Contains Duplicate | Set existence | ⬜ |
+| 2 | 268 | Missing Number | Set / math | ⬜ |
+| 3 | 202 | Happy Number | Cycle detection | ⬜ |
+| 4 | 349 | Intersection of Two Arrays | Set intersection | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 5 | 128 | Longest Consecutive Sequence | Set + expand | ⬜ |
+| 6 | 659 | Split Array into Consecutive Subsequences | Set/map greedy | ⬜ |
+
+---
+
+## Topic 12 — Prefix Sum + Hashmap Combined
+
+**Core Idea:** Build running prefix sum. Store prefix sums in hashmap. At each index check if (currentSum - k) exists — if yes, valid subarray found.
+
+**When to use:**
+- "Count subarrays with sum = k" → prefix + freq map
+- "Longest subarray with sum = k" → prefix + first index map
+- "Subarrays divisible by k" → prefix + modulo map
+- Has negative numbers → can't use sliding window → use this
+
+**Key Insight:** freq[0]=1 before the loop. Always. This handles subarrays starting from index 0. Forget it and you'll get wrong answers on half the test cases.
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 560 | Subarray Sum Equals K | Prefix + freq map | ⬜ |
+| 2 | 525 | Contiguous Array | Replace 0→-1, sum=0 | ⬜ |
+| 3 | 974 | Subarray Sums Divisible by K | Prefix + modulo | ⬜ |
+| 4 | 1248 | Count Nice Subarrays | Replace odd→1 even→0 | ⬜ |
+| 5 | 523 | Continuous Subarray Sum | Prefix + modulo map | ⬜ |
+| 6 | 930 | Binary Subarrays With Sum | Prefix + freq map | ⬜ |
+
+---
+
+## Topic 13 — String as Hashmap Key
+
+**Core Idea:** Use a string's sorted form or character frequency as a canonical key to group similar strings together.
+
+**When to use:**
+- "Group anagrams" → sorted string as key
+- "Find all permutations" → freq array as key
+- "Words with same character count" → freq signature as key
+
+**Key Insight:** Two strings are anagrams if and only if their sorted forms are identical. Sorting takes O(k log k) but gives a universal grouping key. Alternative: use frequency array of size 26 as key — O(k) but more complex.
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 49 | Group Anagrams | Sort + map | ⬜ |
+| 2 | 438 | Find All Anagrams in String | Freq array as key | ⬜ |
+| 3 | 249 | Group Shifted Strings | Shift pattern as key | ⬜ |
+| 4 | 953 | Verifying an Alien Dictionary | Custom order map | ⬜ |
+
+---
+
+## Topic 14 — Top-K Pattern
+
+**Core Idea:** Build frequency map. Then find top K elements by frequency using sorting or min-heap.
+
+**When to use:**
+- "Top K frequent elements" → freq map + heap
+- "K closest points" → distance + heap
+- "K most frequent words" → freq map + heap
+
+**Key Insight:** For Top-K problems, a min-heap of size K is more efficient than sorting all elements. Push to heap, pop when size > K. Final heap contains K largest. O(n log k) vs O(n log n) for sorting.
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 347 | Top K Frequent Elements | Freq map + heap | ⬜ |
+| 2 | 692 | Top K Frequent Words | Freq map + heap | ⬜ |
+| 3 | 451 | Sort Characters By Frequency | Freq map + sort | ⬜ |
+| 4 | 973 | K Closest Points to Origin | Distance + heap | ⬜ |
+
+### 🔴 Medium-Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 5 | 295 | Find Median from Data Stream | Two heaps | ⬜ |
+
+---
+
+## Topic 15 — Binary Search: Classic Template
+
+**Core Idea:** On a sorted array, eliminate half the search space at every step. Compare middle element with target — go left or right accordingly. O(log n) instead of O(n).
+
+**When to use:**
+- Sorted array + find element → classic binary search
+- Find first/last occurrence → binary search with condition
+- "Search in rotated array" → modified binary search
+- Any "find minimum/maximum satisfying condition" → binary search on answer
+
+**Key Insight:** Always use `mid = lo + (hi - lo) / 2` NOT `(lo + hi) / 2`. The second form overflows for large values. This is a classic interview trap.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 704 | Binary Search | Classic template | ⬜ |
+| 2 | 35 | Search Insert Position | Classic + boundary | ⬜ |
+| 3 | 278 | First Bad Version | Binary search on answer | ⬜ |
+| 4 | 374 | Guess Number Higher or Lower | Classic template | ⬜ |
+| 5 | 69 | Sqrt(x) | Binary search on answer | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 6 | 34 | Find First and Last Position | First/last occurrence | ⬜ |
+| 7 | 33 | Search in Rotated Sorted Array | Rotated binary search | ⬜ |
+| 8 | 153 | Find Minimum in Rotated Sorted Array | Rotated binary search | ⬜ |
+| 9 | 162 | Find Peak Element | Binary search on condition | ⬜ |
+| 10 | 74 | Search a 2D Matrix | Flatten + binary search | ⬜ |
+
+---
+
+## Topic 16 — Binary Search on Answer
+
+**Core Idea:** Instead of searching for a value IN the array, search for the ANSWER itself. Define a feasibility function — if condition is satisfied at mid, search left half; else search right half.
+
+**When to use:**
+- "Minimize the maximum" → binary search on answer
+- "Maximize the minimum" → binary search on answer
+- "Can we do X in Y days?" → binary search on Y
+- Any problem where answer has monotonic property
+
+**Key Insight:** The key question is — "is the answer monotonic?" If feasible(x) is true, is feasible(x+1) also true? If yes → binary search on answer. This pattern unlocks an entire class of hard problems.
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 875 | Koko Eating Bananas | BS on speed | ⬜ |
+| 2 | 1011 | Capacity to Ship Packages | BS on capacity | ⬜ |
+| 3 | 1283 | Find Smallest Divisor | BS on divisor | ⬜ |
+| 4 | 2187 | Minimum Time to Complete Trips | BS on time | ⬜ |
+| 5 | 1482 | Minimum Number of Days to Make Bouquets | BS on days | ⬜ |
+
+### 🔴 Medium-Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 6 | 410 | Split Array Largest Sum | BS on answer | ⬜ |
+| 7 | 774 | Minimize Max Distance to Gas Station | BS on distance | ⬜ |
+| 8 | 719 | Find K-th Smallest Pair Distance | BS + sliding window | ⬜ |
+
+---
+
+## 🧠 Week 2 — Key Insights Summary
+
+| Topic | The One Thing To Remember |
+|-------|--------------------------|
+| unordered_map | HashMap = space for speed. O(n) space → O(1) lookup. Think hashmap when doing repeated searches. |
+| unordered_set | Set = map without values. Use when you only need existence, not count. |
+| Prefix + Hashmap | freq[0]=1 ALWAYS before the loop. Non negotiable. |
+| String as Key | Sorted string = canonical anagram key. Two strings are anagrams iff their sorted forms match. |
+| Top-K Pattern | Min-heap of size K → O(n log k). Always better than sorting for Top-K. |
+| Binary Search Classic | mid = lo + (hi-lo)/2. Never (lo+hi)/2. Overflow trap. |
+| Binary Search on Answer | Ask: "is the answer monotonic?" Yes → binary search on answer. Unlocks hard problems. |
+
+---
+
+## 📊 Week 2 Problem Count
+
+| Topic | Easy | Medium | Hard | Total |
+|-------|------|--------|------|-------|
+| unordered_map | 5 | 6 | 2 | 13 |
+| unordered_set | 4 | 2 | 0 | 6 |
+| Prefix + Hashmap | 0 | 6 | 0 | 6 |
+| String as Key | 0 | 4 | 0 | 4 |
+| Top-K Pattern | 0 | 4 | 1 | 5 |
+| Binary Search Classic | 5 | 5 | 0 | 10 |
+| Binary Search on Answer | 0 | 5 | 3 | 8 |
+| **TOTAL** | **14** | **32** | **6** | **52** |
+
+---
