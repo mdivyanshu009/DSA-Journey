@@ -639,6 +639,15 @@ dsa-journey/
 | 8 | 719 | Find K-th Smallest Pair Distance | BS + sliding window | ⬜ |
 
 ---
+### Finding MINIMUM that satisfies condition:
+→ condition met    → ans = mid, high = mid - 1  (try smaller)
+→ condition fails  → low = mid + 1              (need bigger)
+→ return ans
+
+### Finding Maximum that satisfies condition
+condition met   → ans = mid, low = mid + 1   (try bigger)
+condition fails → high = mid - 1             (too big, go smaller)
+return ans
 
 ## 🧠 Week 2 — Key Insights Summary
 
