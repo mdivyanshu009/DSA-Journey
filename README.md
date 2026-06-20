@@ -677,3 +677,217 @@ return ans
 | **TOTAL** | **14** | **32** | **6** | **52** |
 
 ---
+
+---
+
+---
+
+# 📌 WEEK 3 — Linked Lists
+
+---
+
+## Topic 17 — Linked List Basics & Traversal
+
+**Core Idea:** A linked list is a chain of nodes where each node points to the next. Unlike arrays, there's no random access — you must traverse from head to reach any node. Master traversal before anything else.
+
+**When to use:**
+- Build/print/count nodes → simple traversal
+- Find length → traverse and count
+- Find kth node from start → traverse k steps
+
+**Key Insight:** Always check `head == nullptr` before touching `head->next`. Null pointer dereference is the #1 crash cause in linked list problems. Draw the list on paper before coding — visualize pointers as arrows, not just variables.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 206 | Reverse Linked List | Iterative pointer reversal | ⬜ |
+| 2 | 876 | Middle of the Linked List | Fast & slow pointer | ⬜ |
+| 3 | 83 | Remove Duplicates from Sorted List | Single pass traversal | ⬜ |
+| 4 | 234 | Palindrome Linked List | Fast/slow + reverse | ⬜ |
+| 5 | 21 | Merge Two Sorted Lists | Two pointer merge | ⬜ |
+
+---
+
+## Topic 18 — Fast & Slow Pointers (Floyd's)
+
+**Core Idea:** Two pointers move through the list at different speeds — slow moves 1 step, fast moves 2 steps. This reveals cycles, finds middles, and detects intersections without extra space.
+
+**When to use:**
+- "Find the middle node" → slow moves 1, fast moves 2
+- "Detect a cycle" → if fast ever equals slow, there's a cycle
+- "Find cycle start" → reset one pointer to head after detection
+- "Find nth node from end" → two pointers with n gap
+
+**Key Insight:** When fast pointer reaches the end, slow pointer is exactly at the middle. When fast meets slow inside a loop, a cycle exists. This is O(1) space — no hashset needed.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 141 | Linked List Cycle | Fast & slow | ⬜ |
+| 2 | 876 | Middle of the Linked List | Fast & slow | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 3 | 142 | Linked List Cycle II | Fast & slow + reset | ⬜ |
+| 4 | 19 | Remove Nth Node From End | Two pointer gap | ⬜ |
+| 5 | 143 | Reorder List | Fast/slow + reverse + merge | ⬜ |
+| 6 | 2095 | Delete the Middle Node | Fast & slow | ⬜ |
+
+---
+
+## Topic 19 — Reversal Patterns
+
+**Core Idea:** Reverse a linked list (fully or partially) by changing the direction of `next` pointers as you traverse. Track previous, current, and next nodes at every step.
+
+**When to use:**
+- "Reverse the list" → classic iterative reversal
+- "Reverse between positions m and n" → partial reversal
+- "Reverse in groups of k" → reverse + recursive/iterative chaining
+- "Check palindrome" → reverse second half, compare
+
+**Key Insight:** The 3-pointer dance — prev, curr, next — is the foundation of every reversal problem. Save next BEFORE breaking the link, reverse the link, then move all 3 pointers forward. Never lose the reference to the rest of the list.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 206 | Reverse Linked List | Classic iterative | ⬜ |
+| 2 | 234 | Palindrome Linked List | Reverse half + compare | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 3 | 92 | Reverse Linked List II | Partial reversal | ⬜ |
+| 4 | 143 | Reorder List | Reverse + merge | ⬜ |
+| 5 | 24 | Swap Nodes in Pairs | Pairwise reversal | ⬜ |
+
+### 🔴 Medium-Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 6 | 25 | Reverse Nodes in k-Group | Group reversal | ⬜ |
+
+---
+
+## Topic 20 — Merging & Sorting
+
+**Core Idea:** Combine two or more sorted lists using a two-pointer technique similar to merge sort's merge step. For sorting, apply merge sort (divide list in half using slow/fast, recursively sort, merge).
+
+**When to use:**
+- "Merge two sorted lists" → two pointer merge
+- "Merge k sorted lists" → divide and conquer or min-heap
+- "Sort a linked list" → merge sort (only O(n log n) option without O(n) space for arrays)
+
+**Key Insight:** Use a dummy node before the head to avoid special-casing the first node. Merge sort is the only sorting algorithm that works well on linked lists because it doesn't need random access — unlike quicksort.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 21 | Merge Two Sorted Lists | Two pointer merge | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 2 | 148 | Sort List | Merge sort on list | ⬜ |
+| 3 | 86 | Partition List | Two dummy lists | ⬜ |
+| 4 | 2 | Add Two Numbers | Digit-by-digit merge | ⬜ |
+
+### 🔴 Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 5 | 23 | Merge k Sorted Lists | Heap / divide & conquer | ⬜ |
+
+---
+
+## Topic 21 — Deletion & Modification
+
+**Core Idea:** Removing nodes requires careful pointer rewiring — you must hold a reference to the node BEFORE the one you're deleting. Use a dummy node to simplify edge cases like deleting the head.
+
+**When to use:**
+- "Remove nth node from end" → two pointer gap technique
+- "Remove duplicates" → compare adjacent nodes
+- "Delete node given only that node" → copy next node's value, skip it
+- "Remove elements equal to val" → dummy node + traversal
+
+**Key Insight:** Dummy node trick — create a fake node pointing to head before you start. This eliminates all special-casing for "what if we delete the head itself." Always return `dummy->next`, not `head`.
+
+### 🟢 Easy
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 83 | Remove Duplicates from Sorted List | Adjacent comparison | ⬜ |
+| 2 | 203 | Remove Linked List Elements | Dummy node | ⬜ |
+| 3 | 237 | Delete Node in a Linked List | Copy + skip trick | ⬜ |
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 4 | 19 | Remove Nth Node From End | Two pointer gap | ⬜ |
+| 5 | 82 | Remove Duplicates from Sorted List II | Dummy + skip all dupes | ⬜ |
+| 6 | 1171 | Remove Zero Sum Consecutive Nodes | Prefix sum + hashmap | ⬜ |
+
+---
+
+## Topic 22 — Advanced / Combination Problems
+
+**Core Idea:** These problems combine multiple linked list techniques — reversal, fast/slow pointers, hashmap, and recursion — into a single solution. They simulate real interview difficulty.
+
+**When to use:**
+- "Copy list with random pointer" → hashmap for old-to-new node mapping
+- "Intersection of two lists" → two pointer length equalization trick
+- "Flatten multilevel list" → DFS/stack based traversal
+
+**Key Insight:** For "find intersection point" type problems — walk both pointers to the end and switch to the other list's head. They'll meet at the intersection in exactly `lenA + lenB` steps, no length calculation needed.
+
+### 🟡 Medium
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 1 | 160 | Intersection of Two Linked Lists | Two pointer switch | ⬜ |
+| 2 | 138 | Copy List with Random Pointer | Hashmap mapping | ⬜ |
+| 3 | 61 | Rotate List | Find length + reconnect | ⬜ |
+| 4 | 328 | Odd Even Linked List | Two pointer separation | ⬜ |
+
+### 🔴 Hard
+
+| # | LC | Problem | Pattern | Status |
+|---|----|---------|---------|--------|
+| 5 | 430 | Flatten a Multilevel Doubly Linked List | DFS / stack | ⬜ |
+
+---
+
+## 🧠 Week 3 — Key Insights Summary
+
+| Topic | The One Thing To Remember |
+|-------|--------------------------|
+| Basics & Traversal | Always check `head == nullptr` before dereferencing. Draw it on paper first. |
+| Fast & Slow Pointers | Fast moves 2x slow. When fast hits end, slow is at middle. When they meet, there's a cycle. |
+| Reversal Patterns | prev → curr → next dance. Save next BEFORE breaking the link. |
+| Merging & Sorting | Dummy node before head eliminates edge cases. Merge sort is the only good sort for lists. |
+| Deletion & Modification | Hold reference to node BEFORE the one you delete. Dummy node handles head deletion. |
+| Advanced Combinations | Intersection trick — switch heads when reaching end, meet in lenA+lenB steps. |
+
+---
+
+## 📊 Week 3 Problem Count
+
+| Topic | Easy | Medium | Hard | Total |
+|-------|------|--------|------|-------|
+| Basics & Traversal | 5 | 0 | 0 | 5 |
+| Fast & Slow Pointers | 2 | 4 | 0 | 6 |
+| Reversal Patterns | 2 | 3 | 1 | 6 |
+| Merging & Sorting | 1 | 3 | 1 | 5 |
+| Deletion & Modification | 3 | 3 | 0 | 6 |
+| Advanced Combinations | 0 | 4 | 1 | 5 |
+| **TOTAL** | **13** | **17** | **3** | **33** |
+
+---
